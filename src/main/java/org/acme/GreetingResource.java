@@ -29,7 +29,7 @@ public class GreetingResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Uni<Response> sendASimpleEmailAsync(@Valid MailDTO mailDTO) {
         return reactiveMailer.send(
-                        Mail.withText(mailDTO.getTo(), mailDTO.getSubject(), mailDTO.getText()).setFrom("tugs-erdene.o@unitel.mn"))
+                        Mail.withText(mailDTO.getTo(), mailDTO.getSubject(), mailDTO.getText()).setFrom("contact@unitel.mn"))
                 .onItem().transform(ignored -> Response.ok(mailDTO).build())
                 .onFailure().recoverWithItem(throwable -> Response.status(Response.Status.BAD_REQUEST)
                         .entity("Failed to send email: " + throwable.getMessage()).build());
